@@ -1,5 +1,6 @@
 const user = require('../models/user');
 const bcrypt = require('bcrypt');
+const generateToken = require('../utils/jwt')
 const SALT_ROUNDS = 10;
 
 exports.register = async (req, res) => {
@@ -30,7 +31,9 @@ exports.login = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ message: "Invalid password!" })
         }
-        return res.status(200).json({ message: "Login successsful" })
+        const token = generateToken(user)
+
+        return res.status(200).json({ message: "Login successsful", token })
     } catch (err) {
         return res.status(500).json({ message: "Login failed" })
     }
