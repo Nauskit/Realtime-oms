@@ -33,6 +33,6 @@ exports.login = async (req, res) => {
         }
         return res.status(200).json({ message: "Login successsful" })
     } catch (err) {
-        return res.status(500).json({ message: "Login failed", err })
+        return res.status(500).json({ message: "Login failed" })
     }
 }
