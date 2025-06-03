@@ -22,12 +22,11 @@ exports.login = async (req, res) => {
     const { username, password } = req.body;
     try {
         const loginUser = await user.findOne({ username });
+        const isMatch = await bcrypt.compare(password, loginUser.password);
 
         if (!loginUser) {
             return res.status(404).json({ message: "User not found!" })
         }
-        const isMatch = await bcrypt.compare(password, loginUser.password);
-
         if (!isMatch) {
             return res.status(401).json({ message: "Invalid password!" })
         }
