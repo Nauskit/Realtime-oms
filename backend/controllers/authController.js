@@ -5,7 +5,7 @@ const SALT_ROUNDS = 10;
 
 exports.register = async (req, res) => {
     const { username, password, email } = req.body;
-    if (!username || !password || email) {
+    if (!username || !password || !email) {
         return res.status(400).json({ message: "All fields are required!" });
     }
     try {
