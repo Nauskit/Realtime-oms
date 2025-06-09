@@ -6,12 +6,13 @@ dotenv.config();
 
 const verifyToken = (req, res, next) => {
     const authHeader = req.header("Authorization");
-    const token = authHeader.replace("Bearer", "").trim();
+
 
     if (!authHeader || !authHeader.startsWith("Bearer")) {
         return res.status(401).json({ message: "Access token is required" })
     }
 
+    const token = authHeader.replace("Bearer", "").trim();
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET)
         req.user = decoded;
