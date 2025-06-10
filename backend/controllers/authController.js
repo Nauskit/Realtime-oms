@@ -25,14 +25,14 @@ exports.register = async (req, res) => {
 }
 
 exports.login = async (req, res) => {
-    const { username, password } = req.body;
-    if (!username || !password) {
+    const { email, password } = req.body;
+    if (!email || !password) {
         return res.status(400).json({ message: "All fields are required!" });
     }
     try {
 
 
-        const loginUser = await user.findOne({ username });
+        const loginUser = await user.findOne({ email });
         if (!loginUser) {
             return res.status(404).json({ message: "User not found!" })
         }
