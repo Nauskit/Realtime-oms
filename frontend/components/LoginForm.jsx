@@ -21,7 +21,6 @@ export default function LoginForm() {
             const data = await res.json();
             if (res.ok) {
                 localStorage.setItem('accessToken', data.accessToken);
-                localStorage.setItem('refreshToken', data.refreshToken);
                 localStorage.setItem('role', data.role)
 
                 if (data.role === 'admin') {
