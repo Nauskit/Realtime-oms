@@ -19,7 +19,7 @@ export default function Content() {
 
         if (res.ok) {
             setMessage(data.message);
-            console.log("Login success");
+            console.log("Login success:", message);
             window.location.href = '/dashboard';
 
         } else {

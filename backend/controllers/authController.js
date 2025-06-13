@@ -49,3 +49,13 @@ exports.login = async (req, res) => {
         return res.status(500).json({ message: "Login failed", error: err.message })
     }
 }
+
+exports.getUser = async (req, res) => {
+    try {
+        const users = await user.find();
+        res.json(users);
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Failed to get users" })
+    }
+}

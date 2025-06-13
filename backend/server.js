@@ -12,6 +12,7 @@ app.use(cors());
 connectDB();
 
 app.use('/users', authRoutes);
+app.use('/dashboard', authRoutes);
 
 
 app.listen(3000, () => {
