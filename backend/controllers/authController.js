@@ -1,4 +1,4 @@
-const user = require('../models/user');
+const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const { generateAccessToken, generateRefreshToken } = require('../utils/jwt')
 const jwt = require('jsonwebtoken');
@@ -16,13 +16,13 @@ exports.register = async (req, res) => {
     }
     try {
 
-        const existingUser = await user.findOne({ username });
+        const existingUser = await User.findOne({ username });
         if (existingUser) {
             return res.status(400).json({ message: "Username already in use!" })
         }
 
         const hashedPassword = await bcrypt.hash(password, SALT_ROUNDS)
-        const newUser = await user.create({ username, password: hashedPassword, email });
+        const newUser = await User.create({ username, password: hashedPassword, email });
         return res.status(201).json({ message: "Register successfully" })
     } catch (err) {
         console.error(err);
@@ -38,7 +38,7 @@ exports.login = async (req, res) => {
     try {
 
 
-        const loginUser = await user.findOne({ email });
+        const loginUser = await User.findOne({ email });
         if (!loginUser) {
             return res.status(404).json({ message: "User not found!" })
         }
@@ -73,7 +73,7 @@ exports.refreshToken = async (req, res) => {
     }
 
     try {
-        const userFound = await user.findOne({ refreshToken: token });
+        const userFound = await User.findOne({ refreshToken: token });
         if (!userFound) {
             return res.status(403).josn({ message: "Refresh Token invalid" });
         }
@@ -100,7 +100,7 @@ exports.logout = async (req, res) => {
     const { token } = req.body;
 
     try {
-        const userFound = await user.findOne({ refreshToken: token });
+        const userFound = await User.findOne({ refreshToken: token });
         if (!userFound) return res.status(204).send();
 
         userFound.refreshToken = null;
@@ -116,7 +116,7 @@ exports.logout = async (req, res) => {
 
 exports.getUser = async (req, res) => {
     try {
-        const users = await user.find();
+        const users = await User.find();
         res.json(users);
     } catch (err) {
         console.log(err);

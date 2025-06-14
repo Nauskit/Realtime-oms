@@ -13,7 +13,7 @@ const verifyToken = (req, res, next) => {
     const token = authHeader.replace("Bearer", " ").trim();
 
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET)
+        const decoded = jwt.verify(token, process.env.ACCESS_JWT_SECRET)
         req.user = decoded;
         next();
     } catch (err) {

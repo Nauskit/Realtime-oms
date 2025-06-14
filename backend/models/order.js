@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    user: {
+    userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user',
+        ref: 'User',
         required: true
     },
     items: [{
         product: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'product',
+            ref: 'Product',
             required: true
         },
         quantity: {
@@ -30,10 +30,10 @@ const orderSchema = new mongoose.Schema({
         enum: ['Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'],
         default: 'Pending'
     },
-    createAt: {
+    createdAt: {
         type: Date,
         default: Date.now
     }
 })
 
-module.exports = mongoose.model('order', orderSchema);
+module.exports = mongoose.model('Order', orderSchema);

@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const notiSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
     },
     message: {
         type: String,

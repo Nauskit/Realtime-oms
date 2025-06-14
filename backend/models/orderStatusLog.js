@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const orderStatusSchema = new mongoose.Schema({
-    order: {
+    orderId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'order',
+        ref: 'Order',
         required: true
     },
     status: {
@@ -14,10 +14,10 @@ const orderStatusSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    changeBy: {
+    changedBy: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'User'
     }
 })
 
-module.exports = mongoose.model('orderStatusLog', orderStatusSchema);
+module.exports = mongoose.model('OrderStatusLog', orderStatusSchema);
