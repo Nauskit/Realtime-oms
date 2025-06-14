@@ -3,8 +3,10 @@ import React from 'react'
 export default function DashboardAdmin() {
     return (
         <>
-            <div>Admin Dashboard</div>
-            <p>Welcome! admin</p>
+            <div style={{ textAlign: 'center' }}>
+                <h1>Admin Dashboard</h1>
+                <p>Welcome! admin</p>
+            </div>
         </>
     )
 }

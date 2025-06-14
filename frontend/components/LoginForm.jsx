@@ -27,7 +27,7 @@ export default function LoginForm() {
                 if (data.role === 'admin') {
                     navigate('/dashboard/admin');
                 } else if (data.role === 'user') {
-                    navigate('/')
+                    navigate('/feed')
                 } else {
                     console.log(data.message || "Login");
                 }
@@ -53,6 +53,7 @@ export default function LoginForm() {
                     <label htmlFor='password'>password</label>
                     <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)}></input>
                     <button style={{ marginTop: '20px' }}>Login</button>
+                    <p style={{ color: 'red', marginTop: '10px' }}>{message}</p>
                 </form>
             </div>
         </>
