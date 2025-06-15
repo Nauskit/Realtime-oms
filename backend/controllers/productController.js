@@ -19,7 +19,10 @@ exports.createProduct = async (req, res) => {
 
         await newProduct.save();
 
-        return res.status(201).json({ message: "Order created successfully", order: newProduct })
+        const io = req.app.get('io');
+        io.emit('newProduct', newProduct);
+
+        return res.status(201).json({ message: "Product created successfull", order: newProduct })
 
     } catch (err) {
         console.log(err);

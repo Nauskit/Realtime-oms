@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Order = require('../models/order');
 const OrderStatusLog = require('../models/orderStatusLog');
 const Product = require('../models/product')
+const User = require('../models/user')
 
 
 
@@ -96,3 +97,4 @@ exports.updateOrderStatus = async (req, res) => {
         return res.status(500).json({ message: "Server error", error: err.message })
     }
 }
+
