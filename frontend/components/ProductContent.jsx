@@ -1,6 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 export default function ProductContent() {
+    const [product, setProduct] = useState([]);
+    const [error, setError] = useState("");
+
+    const fetchProduct = async () => {
+        try {
+            const res = await fetch('http://localhost:3000/products')
+            const data = await res.json();
+            if (!res.ok) {
+                throw new Error(data.message || "Failed to fetch");
+            }
+
+            setProduct(data || []);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+    useEffect(() => {
+        fetchProduct();
+    }, []);
+
+
     return (
         <>
             <main className='flex-1 p-6'>
@@ -24,28 +45,21 @@ export default function ProductContent() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td className=' p-2'>IphoneXs</td>
-                                    <td className=' p-2'>smart phone</td>
-                                    <td className=' p-2'>158</td>
-                                    <td className=' p-2'>50</td>
-                                    <td>
-                                        <button className='bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600'>
-                                            Update
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td className=' p-2'>IphoneXs</td>
-                                    <td className=' p-2'>smart phone</td>
-                                    <td className=' p-2'>158</td>
-                                    <td className=' p-2'>50</td>
-                                    <td>
-                                        <button className='bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600'>
-                                            Update
-                                        </button>
-                                    </td>
-                                </tr>
+                                {product.map((item) => (
+                                    <tr key={item._id}>
+                                        <td className=' p-2'>{item.productName}</td>
+                                        <td className=' p-2'>{item.description}</td>
+                                        <td className=' p-2'>{item.price}</td>
+                                        <td className=' p-2'>{item.stock}</td>
+                                        <td>
+                                            <button className='bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600'>
+                                                Update
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+
+
                             </tbody>
                         </table>
                     </div>

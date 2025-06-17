@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const Order = require('../models/order');
 const OrderStatusLog = require('../models/orderStatusLog');
-const Product = require('../models/product')
-const User = require('../models/user')
+const Product = require('../models/product');
 
 
 
@@ -74,7 +73,7 @@ exports.updateOrderStatus = async (req, res) => {
 
     try {
 
-        const order = await Order.findById(orderId);
+        const order = await Order.findById(orderId).populate('items.product', 'productName description status');
         if (!order) {
             return res.status(404).json({ message: "Order not found!" })
         }
@@ -89,6 +88,8 @@ exports.updateOrderStatus = async (req, res) => {
         })
 
         await log.save();
+        const io = req.app.get('io');
+        io.emit('orderStatusUpdate', order)
 
         return res.status(200).json({ message: "Order status update", order, log })
 
@@ -98,3 +99,35 @@ exports.updateOrderStatus = async (req, res) => {
     }
 }
 
+
+exports.getUserOrder = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const getOrder = await Order.find({ userId }).sort({ createAt: -1 }).populate('items.product', 'productName status description')
+            .populate('userId', 'username');
+        if (!getOrder.length) {
+            return res.status(404).json({ message: "No orders found!" })
+        }
+
+        return res.status(200).json({ getOrder });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Server error", error: err.message })
+    }
+}
+
+
+exports.getOrderById = async (req, res) => {
+    try {
+        const { userId } = req.params;
+        const getOrder = await Order.find({ userId })
+            .sort({ createAt: -1 })
+            .populate('items.product', 'productName status description')
+            .populate('userId', 'username');
+        return res.json({ getOrder })
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: 'Failed to get orders', error: err.message })
+
+    }
+}

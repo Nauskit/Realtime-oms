@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-
+import { Link } from "react-router-dom";
 
 export default function UserContent() {
     const [users, setUser] = useState([]);
@@ -9,7 +9,7 @@ export default function UserContent() {
 
         const accessToken = localStorage.getItem('accessToken');
 
-        fetch('http://localhost:3000/users/admin', {
+        fetch('http://localhost:3000/dashboard', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${accessToken}`
@@ -20,12 +20,14 @@ export default function UserContent() {
                 throw new Error(errorData.message || 'Fetch failed');
             }
             return res.json();
+
         }).then(data => setUser(data))
             .catch(err => {
                 console.log(err);
                 setError(err.message);
             });
     }, []);
+
 
     return (
         <>
@@ -53,22 +55,20 @@ export default function UserContent() {
                                         <th className='p-3 text-left'>Email</th>
                                         <th className='p-3 text-left'>Create-At</th>
                                         <th className='p-3 text-left'>Order Status</th>
-                                        <th className='p-3 text-left'>Action </th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {users.map(user => {
                                         return (
-                                            <tr key={user.id}>
+                                            <tr key={user._id}>
                                                 <td className=' p-2'>{user.username}</td>
                                                 <td className=' p-2'>{user.email}</td>
                                                 <td className=' p-2'>{user.createdAt}</td>
-                                                <td className=' p-2'>Pending</td>
-                                                <td>
-                                                    <button className='bg-gray-500 text-white px-3 py-1 rounded hover:bg-green-600'>
-                                                        Update
-                                                    </button>
-                                                </td>
+                                                <td className=' p-2 hover:text-blue-600'>
+                                                    <Link to={`/admin/$${user._id}`}>
+                                                        Check Status
+                                                    </Link></td>
                                             </tr>
                                         )
                                     })}

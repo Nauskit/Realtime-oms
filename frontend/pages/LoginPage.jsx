@@ -31,9 +31,9 @@ export default function LoginPage() {
 
 
             if (data.role === 'admin' && data.accessToken) {
-                navigate('/users/admin');
+                navigate('/dashboard');
             } else {
-                navigate('/store')
+                navigate('/')
             }
             alert('Login successful!');
             // เก็บ token / redirect ตามต้องการ

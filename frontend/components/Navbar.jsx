@@ -18,14 +18,14 @@ export default function Navbar() {
             </li>
             <li>
               <Link
-                to="/users/admin"
+                to="/dashboard"
                 className="block p-2 rounded hover:bg-gray-200"
               >
                 User
               </Link>
             </li>
             <li>
-              <Link to="/store" className="block p-2 rounded hover:bg-gray-200">
+              <Link to="/" className="block p-2 rounded hover:bg-gray-200">
                 Store
               </Link>
             </li>

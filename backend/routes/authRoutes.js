@@ -14,5 +14,8 @@ const limiter = rateLimit({
 router.post('/register', authControllers.register);
 router.post('/login', limiter, authControllers.login);
 router.get('/admin', verifyToken, checkRole('admin'), authControllers.getUser);
+router.get('/', verifyToken, authControllers.getUserId)
+
+
 
 module.exports = router;

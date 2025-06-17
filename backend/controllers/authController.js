@@ -123,3 +123,14 @@ exports.getUser = async (req, res) => {
         return res.status(500).json({ message: "Failed to get users" })
     }
 }
+
+exports.getUserId = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const getUser = await User.findById(userId).select('username');
+        return res.json(getUser)
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json({ message: "Failed to get users" })
+    }
+}
