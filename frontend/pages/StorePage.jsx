@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import io from "socket.io-client";
 
+
 export default function StorePage() {
   const [products, setProducts] = useState([]);
   const [error, setError] = useState("");
@@ -62,8 +63,15 @@ export default function StorePage() {
     };
     socket.on("newProduct", handleNewProduct);
 
+    const handleOrderStatusUpdate = (order) => {
+      alert(`Order #${order._id} status updated to ${order.status}`);
+    }
+
+    socket.on("orderStatusUpdate", handleOrderStatusUpdate);
+
     return () => {
       socket.off("newProduct", handleNewProduct);
+      socket.off("orderStatusUpdate", handleOrderStatusUpdate)
       socket.disconnect();
     };
   }, []);
@@ -114,6 +122,7 @@ export default function StorePage() {
       console.log(err.message);
     }
   };
+
 
 
   return (

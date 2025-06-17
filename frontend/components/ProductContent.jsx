@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 export default function ProductContent() {
     const [product, setProduct] = useState([]);
-    const [error, setError] = useState("");
 
     const fetchProduct = async () => {
         try {

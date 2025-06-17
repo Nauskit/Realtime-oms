@@ -24,6 +24,13 @@ const worker = new Worker(
       console.log(
         `Sending notification to user: ${noti.user.username} - ${noti.message}`
       );
+
+      io.to(noti.user._id.toString().emit("notification", {
+        id: noti._id,
+        message: noti.message,
+        type: noti.type,
+        createAt: noti.createAt,
+      }));
     } else {
       console.log(`Notification not found: ${notificationId}`);
     }
