@@ -7,7 +7,7 @@ export default function OrderPage() {
 
 
   useEffect(() => {
-    const socket = io('http://localhost:3000')
+    const socket = io('https://realtime-oms-backend.onrender.com')
 
     const fetchOrderUser = async () => {
       const accessToken = localStorage.getItem('accessToken');
@@ -17,7 +17,7 @@ export default function OrderPage() {
       }
 
       try {
-        const res = await fetch('http://localhost:3000/orders/', {
+        const res = await fetch('https://realtime-oms-backend.onrender.com/orders/', {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }

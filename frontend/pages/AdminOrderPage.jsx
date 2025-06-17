@@ -25,7 +25,7 @@ export default function AdminOrderPage() {
                 modifyUserId = modifyUserId.slice(1);
             }
             try {
-                const res = await fetch(`http://localhost:3000/orders/user/${modifyUserId}`, {
+                const res = await fetch(`https://realtime-oms-backend.onrender.com/orders/user/${modifyUserId}`, {
                     headers: {
                         Authorization: `Bearer ${accessToken}`,
                     },
@@ -70,7 +70,7 @@ export default function AdminOrderPage() {
         }
 
         try {
-            const res = await fetch(`http://localhost:3000/orders/${orderId}/status`, {
+            const res = await fetch(`https://realtime-oms-backend.onrender.com/orders/${orderId}/status`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",

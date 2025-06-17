@@ -14,7 +14,7 @@ export default function LoginPage() {
         setError('');
 
         try {
-            const response = await fetch('http://localhost:3000/users/login', {
+            const response = await fetch('https://realtime-oms-backend.onrender.com/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password, })
@@ -36,7 +36,6 @@ export default function LoginPage() {
                 navigate('/')
             }
             alert('Login successful!');
-            // เก็บ token / redirect ตามต้องการ
         } catch (err) {
             setError(err.message);
         }

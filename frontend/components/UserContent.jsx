@@ -9,7 +9,7 @@ export default function UserContent() {
 
         const accessToken = localStorage.getItem('accessToken');
 
-        fetch('http://localhost:3000/dashboard', {
+        fetch('https://realtime-oms-backend.onrender.com/dashboard', {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${accessToken}`

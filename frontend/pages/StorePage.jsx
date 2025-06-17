@@ -21,7 +21,7 @@ export default function StorePage() {
       }
 
       try {
-        const res = await fetch('http://localhost:3000/users', {
+        const res = await fetch('https://realtime-oms-backend.onrender.com/users', {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
@@ -42,7 +42,7 @@ export default function StorePage() {
 
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:3000/products");
+        const res = await fetch("https://realtime-oms-backend.onrender.com/products");
         const data = await res.json();
         if (!res.ok) {
           throw new Error(data.message || "Failed to load products");
@@ -56,7 +56,7 @@ export default function StorePage() {
     fetchProducts();
     fetchUser();
 
-    const socket = io("http://localhost:3000");
+    const socket = io("https://realtime-oms-backend.onrender.com");
 
     const handleNewProduct = (newProduct) => {
       setProducts((prevProducts) => [newProduct, ...prevProducts]);
@@ -101,7 +101,7 @@ export default function StorePage() {
 
 
     try {
-      const res = await fetch('http://localhost:3000/orders', {
+      const res = await fetch('https://realtime-oms-backend.onrender.com/orders', {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
