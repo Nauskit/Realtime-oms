@@ -5,8 +5,8 @@ const orderRoutes = require('./routes/orderRoutes');
 const productRoutes = require('./routes/productRoutes');
 const dashBoardRoutes = require('./routes/dashBoardRoutes');
 const bodyParser = require('body-parser');
-const checkRole = require('../middleware/checkRole');
-const verifyToken = require('../middleware/verifyToken');
+const checkRole = require('./middleware/verifyToken');
+const verifyToken = require('./middleware/verifyToken');
 const cors = require('cors');
 
 const app = express();
