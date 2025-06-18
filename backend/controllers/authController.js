@@ -86,7 +86,7 @@ exports.refreshToken = async (req, res) => {
                 username: decoded.username,
                 role: decoded.role
             })
-            res.josn({ accessToken });
+            res.json({ accessToken });
         })
 
     } catch (err) {
