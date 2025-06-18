@@ -27,7 +27,7 @@ export default function OrderPage() {
         if (!res.ok) {
           throw new Error(data.message || "Failed to fetch");
         }
-        setOrders(data.getOrder);
+        setOrders(data.getOrder || []);
       } catch (err) {
         console.log(err.message);
         setError(err.message);
@@ -62,7 +62,7 @@ export default function OrderPage() {
       </div>
       <main className='flex-1 p-6'>
         <header className='flex justify-between items-center mb-6'>
-          <h1 className='text-2xl font-bold'>Order Status: user1</h1>
+          <h1 className='text-2xl font-bold'>Order Status</h1>
         </header>
 
         <div className='bg-white rounded-lg shadow mt-10 '>
@@ -77,16 +77,24 @@ export default function OrderPage() {
                 </tr>
               </thead>
               <tbody>
-                {orders.map(order => (
-                  order.items.map((item, index) => (
-                    <tr key={`${order._id}-${index}`}>
-                      <td className='p-2'>{item.product?.productName}</td>
-                      <td className='p-2'>{item.product?.description || 'No description'}</td>
-                      <td className='p-2'>{order.totalAmount}</td>
-                      <td className='p-2'>{order.status}</td>
-                    </tr>
-                  ))
-                ))}
+                {orders.length === 0 ? (
+                  <tr>
+                    <td colSpan="4" className="text-center p-4 text-gray-500">
+                      No orders
+                    </td>
+                  </tr>
+                ) : (
+                  orders.map(order =>
+                    order.items.map((item, index) => (
+                      <tr key={`${order._id}-${index}`}>
+                        <td className='p-2'>{item.product?.productName}</td>
+                        <td className='p-2'>{item.product?.description || 'No description'}</td>
+                        <td className='p-2'>{order.totalAmount}</td>
+                        <td className='p-2'>{order.status}</td>
+                      </tr>
+                    ))
+                  )
+                )}
               </tbody>
             </table>
           </div>
