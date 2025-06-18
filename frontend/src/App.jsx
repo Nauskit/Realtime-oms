@@ -16,9 +16,9 @@ function App() {
         <Routes>
           <Route path='/' element={<StorePage />} />
           <Route path='/dashboard' element={<UserDashboard />} />
-          <Route path='/product/' element={<ProductDashboard />} />
-          <Route path='/login/' element={<LoginPage />} />
-          <Route path='/order/' element={<OrderPage />} />
+          <Route path='/product' element={<ProductDashboard />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/order' element={<OrderPage />} />
           <Route path='/admin/:userId' element={<AdminOrderPage />} />
         </Routes>
       </BrowserRouter>
